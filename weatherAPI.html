@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="">Nhập tên thành phố</label>
+        <input type="text" id="city-name" placeholder="nhập vào tên thành phố">
+    </div>
+    <div>
+        <h2>Thông tin thời tiết</h2>
+        <h3>Tên thành phố<span id="opCityname"></span>,<span id="opCountryName"></span></h3>
+        <p>Nhiệt độ<span id="opTemp">độ C</span></p>
+        <p>Độ ẩm<span id="opHum">%</span></p>
+        <p>Thời tiết<span id="weather"></span></p>
+    </div>
+    <script>
+        var apiURL = 'https://api.openweathermap.org/data/2.5/weather?appid=a195b89a991f32ef8940d3ad3d44adbb&';
+        var city = document.querySelector('#city-name')
+        city.onkeydown = function(event){
+          if(event.keyCode === 13){
+              // lấy value từ input sau đó gửi request lên api weather
+              var cityName = event.target.value;
+              var requestURL = apiURL + "&q=" + cityName 
+              // Gửi request
+              fetch(requestURL,{
+                  method:'get'
+              })
+              .then(response=>response.json())
+              .then(data=>{
+                  console.log(data)
+                  document.querySelector('#opCityname').innerText =  data.name
+                  document.querySelector('#opCountryName').innerText = data.sys.country
+                  document.querySelector('#opTemp').innerText = data.main.temp
+                  document.querySelector('#opHum').innerText = data.main.humidity
+                  document.querySelector('#weather').innerText = data.weather[0].main
+              })
+          }
+        }
+    </script>
+</body>
+</html>

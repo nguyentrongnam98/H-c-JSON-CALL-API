@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     function changeColorBackGround(color,time){
+         return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                document.querySelector('body').style.backgroundColor = color;
+                return resolve()
+            }, time);
+         })
+     }
+     changeColorBackGround('yellow',3000)
+     .then(()=>{
+         
+     })
+     .then(()=>{
+         changeColorBackGround('orange',2000)
+         console.log(1      )
+     })
+     function wait(ms){
+         return new Promise(r=>{
+             setTimeout(() => {
+                 r()
+             }, ms);
+         })
+     }
+     async function main(callback){
+         console.log('sắp rồi ...')
+         await wait(2000)
+         console.log('chờ tí...')
+         await wait(1000)
+         console.log('Xong rồi đây')
+     }
+     main()
+     var name = prompt('Nhập vào tên');
+     var subject = prompt('Nhập vào subject');
+     var lab1 = 0;
+     var lab2 = 0;
+     var lab3 = 0;
+     var final = 0;
+     var avg = 0;
+     function Score(lab,ms){
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+              var score = prompt('Nhập điểm ' + lab)
+              return resolve()
+            }, ms);
+        })
+     }
+     async function main(){
+         lab1 = await Score('lab1',0)
+         lab2 = await Score('lab2',3000)
+         lab3 = await Score('lab3',4000)
+         final = await Score('final',2000)
+         avg = lab1*0.1 + lab2*0.2 + lab3*0.3 + final*0.4;
+         console.log(avg)
+     }
+     main()
+    </script>
+</body>
+</html>

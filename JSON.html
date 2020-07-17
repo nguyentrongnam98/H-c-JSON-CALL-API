@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" class="table stripped ">
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Logo</th>
+            <th>Address</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        // Lấy URL
+        var url = 'https://5f0b1beb5e512a00161c1be4.mockapi.io/Hotel';
+        // Nhận vào URL vaf method
+        fetch(url,{
+            method:'get'
+        })
+        // Server trả về 1 response sau đó đc chuyển từ chuỗi về obj
+        .then(response=>response.json())
+        // Đây là data ta nhận đc sau khi đc chuyển đổi thành dạng obj
+        // Giờ ta sẽ thao tác vs nó
+        .then(data=>{
+            if(data.length){
+                let content = ``;
+                // Dùng forEach để chuyển hết dữ liệu theo DOM
+                data.forEach(item=>{
+                    content += `
+                       <tr id = "row-${item.id}">
+                         <td>${item.id}</td>
+                         <td>${item.name}</td>
+                         <td><img src = "${item.logo}"></td>
+                         <td>${item.Address}</td>
+                         <td><button class = "btn btn-smail btn-primary">Sửa</td>
+                        <td><button class = "btn btn-smail btn-danger" onclick="Delete(${item.id})">Xoá</td>
+                       </tr>
+                    `
+                })
+                document.querySelector('tbody').innerHTML = content;
+            }
+        })
+            
+        function Delete(id){
+           var removeE = document.querySelector('#row-'+id)
+           removeE.parentNode.removeChild(removeE)
+           var dele = url + '/' +id;
+           fetch(dele,{
+               method:'delete'
+           })
+           .then(response=>response.json())
+           .then(data=>console.log(data))
+        }
+    </script>
+</body>
+</html>

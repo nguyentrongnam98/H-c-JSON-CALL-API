@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Loading...</h2>
+    <script>
+        var promise = new Promise((resolve,reject)=>{
+            console.log(0)
+            return resolve()
+        })
+        .then(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(1)
+                    return resolve()
+                }, 5000);
+            })
+        })
+        .then(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(2)
+                    return resolve()
+                }, 4000);
+            })
+        })
+        .then(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                     console.log(3)
+                     return resolve()
+                }, 3000);
+            })
+        })
+        .then(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(4)
+                    return resolve()
+                }, 2000);
+            })
+        })
+        .then(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(5)
+                }, 1000);
+            })
+        })
+        function resetBg(color,time){
+          
+            return new Promise(resolve=>{
+                setTimeout(() => {
+                    document.querySelector('body').style.backgroundColor = color;
+                    return resolve()
+                }, time);
+            })
+        }
+        resetBg('yellow',2000)
+        .then(()=>{
+             resetBg('green',3000)
+        })
+        .then(()=>{
+            resetBg('pink',4000)
+        })
+      function CheckMark (mark,time){
+          return new Promise((resolve,reject)=>{
+              setTimeout(() => {
+                  if(mark >=9){
+                      return resolve(mark)
+                  }else{
+                      return reject('Ban khong du dieu kien')
+                  }
+              }, time);
+          })
+      }
+      var mark = prompt('Ban nhap vao diem')
+      var time = prompt('Ban nhap vao thoi gian')
+      CheckMark(parseInt(mark),parseInt(time))
+      .then(mark=>{
+          document.querySelector('h2').innerText = 'Diem cua ban la :' + mark;
+      })  
+      .catch(err=>{
+          document.querySelector('h2').innerText = err
+      })
+      
+    </script>
+</body>
+</html>

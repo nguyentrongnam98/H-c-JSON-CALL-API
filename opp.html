@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Demo lỗi</h3>
+   
+    <script>
+        // Tạo ra 1 đối tượng
+        // Tên biến là tên mình
+        // trong obj chứa thông tin cá nhân các thông tin đó kiểu dữ liệu đa dạng
+        var nam = {
+            name:'Nam',
+            age:22,
+            eat:()=>console.log(this.name + ' đang ăn cơm'),
+            isHansome:true,
+            hobby:['đá bóng','đi chơi','đi ăn kem'],
+            gender:'Male'
+        }
+     function student (mssv,name){
+         this.mssv = mssv;
+         this.name = name;
+     }
+     var Nam = new student('11','NaM')
+     var test= [1,2,3,4,5,6]
+     Array.prototype.tinhtong = function  (){
+         var tong = 0;
+         console.log(this)
+         this.forEach(value=>tong +=value)
+         return tong;
+     }
+     console.log(test.tinhtong())
+     var people = {
+         name:'Dang Quang Duc',
+         age:2,
+         showInfo:function(){
+             console.log('cháu tên là'+this.name+'năm nay cháu' + this.age);
+         }
+     }
+     
+     var quangduc = {
+         __proto__:people
+     }
+     var trongnam = {
+        __proto__:people
+     }
+     trongnam.name = 'Trọng Nam';
+     trongnam.age = 4;
+     console.log(quangduc.showInfo())
+     console.log(trongnam.showInfo())
+     var gin ={
+         se:function(){
+             return this
+         }
+     }
+     console.log(gin === gin.se())
+     var game = {title:'nam'}
+     var sea = {title:'nam'}
+     console.log(game === sea)
+     var a  = {
+            a:1,
+            b:{c:2}
+            }
+            var b ={}
+            for(let i in a){
+            b[i]=a[i]
+            };
+           
+            var b = JSON.parse(JSON.stringify(b))
+            b.b.c = 12
+            console.log(b)
+    </script>
+</body>
+</html>

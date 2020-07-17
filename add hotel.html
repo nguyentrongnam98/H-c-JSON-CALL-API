@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Form tạo mới hotel-->
+   <div class="container">
+       <br/>
+       <h2>Thêm mới khách sạn</h2>
+       <div class="row">
+           <div class="col-6 offset-3">
+            <form  onsubmit="return submitForm(this)">
+            <div class="form-group">
+                <label for="">Tên khách sạn</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Ảnh logo</label>
+                <input type="text" name="logo" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Địa chỉ khách sạn</label>
+                <input type="text" name="address" class="form-control">
+            </div>
+            <div class="justify-content-center">
+                <button type="submit"class="btn btn-sm btn-primary">Lưu</button>&nbsp;
+                <a href="them sua xoa.html" class="btn btn-sm btn-danger">Huỷ</a>
+            </div>
+        </form>
+           </div>
+       </div>
+   </div>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script>
+       var api ='https://5f0b1beb5e512a00161c1be4.mockapi.io/Hotel'
+       function submitForm(el){
+           const name = document.querySelector('[name="name"]').value;
+           const logo = document.querySelector('[name="logo"]').value;
+           const address = document.querySelector('[name="address"]').value;
+           const requestObj = {
+               name,
+               logo,
+               address,
+           }
+           console.log(requestObj)
+           // gửi request lên mokAPI để thêm khách sạn
+           axios.post(api,requestObj)
+           .then(data=>{
+               if(data.statusText == 'Created'){
+                   window.location.href = 'them sua xoa.html'
+               }
+           })
+           return false;
+       }
+   </script>
+</body>
+</html>
